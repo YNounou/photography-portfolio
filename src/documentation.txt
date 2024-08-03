@@ -1,0 +1,17 @@
+--------- DEV ---------
+--------- END DEV ---------
+--------- TEST ---------
+to enable store in testing, add the followind:
+- in configureTestingModule inside beforeEach method:       providers: [provideMockStore()]
+- also inside beforeEach: 
+-- store = TestBed.inject(MockStore);
+-- component = TestBed.createComponent(AppComponent).componentInstance;
+-- spyOn(store, 'select').and.returnValue(of(0));
+-- spyOn(store, 'dispatch').and.callThrough();
+- example of code: 
+-- it('should increment counter', () => {
+--- store.setState({ counter: 0 });
+--- component.increment();
+--- expect(store.dispatch).toHaveBeenCalledWith(increment());
+-- })
+--------- END TEST ---------
